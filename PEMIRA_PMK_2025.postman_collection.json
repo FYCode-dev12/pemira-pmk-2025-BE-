@@ -1,0 +1,653 @@
+{
+    "info": {
+        "_postman_id": "pemira-pmk-2025-api",
+        "name": "PEMIRA PMK 2025 API",
+        "description": "Complete API collection for PEMIRA PMK 2025 voting system",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Login Admin",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.environment.set(\"admin_token\", jsonData.token);",
+                                    "    pm.environment.set(\"current_token\", jsonData.token);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"Admin123!\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/admin/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "admin", "login"]
+                        },
+                        "description": "Login sebagai admin untuk mengakses fitur admin"
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"Admin123!\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/auth/admin/login",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "auth", "admin", "login"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"role\": \"admin\",\n    \"token\": \"2|ZWlN6mneqcBElPmjZLoxE8fBsULhUgbMQCYtFfrre34269d4\",\n    \"admin\": {\n        \"id\": 2,\n        \"username\": \"admin\",\n        \"role\": \"admin\"\n    }\n}"
+                        },
+                        {
+                            "name": "Invalid Credentials",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"wrongpassword\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/auth/admin/login",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "auth", "admin", "login"]
+                                }
+                            },
+                            "status": "Unprocessable Entity",
+                            "code": 422,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"message\": \"Kredensial admin tidak valid\",\n    \"errors\": {\n        \"username\": [\n            \"Kredensial admin tidak valid\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Login Super Admin",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.environment.set(\"super_admin_token\", jsonData.token);",
+                                    "    pm.environment.set(\"current_token\", jsonData.token);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"superadmin\",\n    \"password\": \"SuperAdmin123!\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/super-admin/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "super-admin", "login"]
+                        },
+                        "description": "Login sebagai super admin untuk mengakses semua fitur"
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"superadmin\",\n    \"password\": \"SuperAdmin123!\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/auth/super-admin/login",
+                                    "host": ["{{base_url}}"],
+                                    "path": [
+                                        "api",
+                                        "auth",
+                                        "super-admin",
+                                        "login"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"role\": \"super-admin\",\n    \"token\": \"3|RJFY4GKeGJ0ZGCrZMuzH5RYclYziDnJYOe6SwJyd6ea2a367\",\n    \"admin\": {\n        \"id\": 1,\n        \"username\": \"superadmin\",\n        \"role\": \"super-admin\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Login Pemilih",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.environment.set(\"pemilih_token\", jsonData.token);",
+                                    "    pm.environment.set(\"current_token\", jsonData.token);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nim\": \"119380073\",\n    \"token\": \"yhwcjk\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/pemilih/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "pemilih", "login"]
+                        },
+                        "description": "Login sebagai pemilih menggunakan NIM dan token yang diberikan"
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"nim\": \"119380073\",\n    \"token\": \"yhwcjk\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/auth/pemilih/login",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "auth", "pemilih", "login"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"role\": \"pemilih\",\n    \"token\": \"4|YWhmEVC9OcJSL2UK59KJTg48laTdG4sJt6WaWo0g31ef609c\",\n    \"pemilih\": {\n        \"id\": 1,\n        \"nim\": \"119380073\",\n        \"nama\": \"Amri ebenezer nainggolan\",\n        \"fakultas\": \"FTIK\",\n        \"program_studi\": \"S1 DESAIN KOMUNIKASI VISUAL\",\n        \"sudah_memilih\": false\n    }\n}"
+                        },
+                        {
+                            "name": "Invalid Token/NIM",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"nim\": \"119380073\",\n    \"token\": \"wrongtoken\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/auth/pemilih/login",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "auth", "pemilih", "login"]
+                                }
+                            },
+                            "status": "Unprocessable Entity",
+                            "code": 422,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"message\": \"Token atau NIM tidak valid\",\n    \"errors\": {\n        \"nim\": [\n            \"Token atau NIM tidak valid\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{current_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/logout",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "logout"]
+                        },
+                        "description": "Logout dan hapus token saat ini"
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/auth/logout",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "auth", "logout"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"message\": \"Berhasil logout\"\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Kandidat",
+            "item": [
+                {
+                    "name": "Get All Kandidat",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{current_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/kandidat",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "kandidat"]
+                        },
+                        "description": "Mendapatkan daftar semua kandidat. Butuh autentikasi (admin atau pemilih)."
+                    },
+                    "response": [
+                        {
+                            "name": "Success - With Data",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/kandidat",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "kandidat"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"nomor_urut\": 1,\n            \"nama_ketua\": \"John Doe\",\n            \"nama_wakil\": \"Jane Smith\",\n            \"visi\": \"Visi kandidat 1\",\n            \"misi\": \"Misi kandidat 1\",\n            \"foto_ketua\": \"path/to/foto1.jpg\",\n            \"foto_wakil\": \"path/to/foto2.jpg\"\n        },\n        {\n            \"id\": 2,\n            \"nomor_urut\": 2,\n            \"nama_ketua\": \"Bob Johnson\",\n            \"nama_wakil\": \"Alice Brown\",\n            \"visi\": \"Visi kandidat 2\",\n            \"misi\": \"Misi kandidat 2\",\n            \"foto_ketua\": \"path/to/foto3.jpg\",\n            \"foto_wakil\": \"path/to/foto4.jpg\"\n        }\n    ]\n}"
+                        },
+                        {
+                            "name": "Success - Empty",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/kandidat",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "kandidat"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"data\": []\n}"
+                        },
+                        {
+                            "name": "Unauthorized",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/kandidat",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "kandidat"]
+                                }
+                            },
+                            "status": "Unauthorized",
+                            "code": 401,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Voting",
+            "item": [
+                {
+                    "name": "Submit Vote",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{pemilih_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"kandidat_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/vote",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "vote"]
+                        },
+                        "description": "Submit vote untuk kandidat tertentu. Hanya bisa dilakukan sekali per pemilih."
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"kandidat_id\": 1\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/vote",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "vote"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"message\": \"Suara berhasil disimpan\",\n    \"data\": {\n        \"kandidat_id\": 1,\n        \"waktu_vote\": \"2025-11-21T10:30:00.000000Z\"\n    }\n}"
+                        },
+                        {
+                            "name": "Already Voted",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"kandidat_id\": 1\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/vote",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "vote"]
+                                }
+                            },
+                            "status": "Unprocessable Entity",
+                            "code": 422,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"error\",\n    \"message\": \"Anda sudah memilih\"\n}"
+                        },
+                        {
+                            "name": "Invalid Kandidat",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"kandidat_id\": 999\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/vote",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "vote"]
+                                }
+                            },
+                            "status": "Unprocessable Entity",
+                            "code": 422,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"message\": \"The selected kandidat id is invalid.\",\n    \"errors\": {\n        \"kandidat_id\": [\n            \"The selected kandidat id is invalid.\"\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Check Vote Status",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{pemilih_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/vote/status",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "vote", "status"]
+                        },
+                        "description": "Cek apakah pemilih sudah melakukan voting atau belum"
+                    },
+                    "response": [
+                        {
+                            "name": "Already Voted",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/vote/status",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "vote", "status"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"sudah_memilih\": true,\n    \"waktu_memilih\": \"2025-11-21T10:30:00.000000Z\"\n}"
+                        },
+                        {
+                            "name": "Not Voted Yet",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/vote/status",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "vote", "status"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"sudah_memilih\": false,\n    \"waktu_memilih\": null\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Results",
+            "item": [
+                {
+                    "name": "Get Results Summary",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/results/summary",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "results", "summary"]
+                        },
+                        "description": "Mendapatkan ringkasan hasil voting. Hanya bisa diakses oleh admin dan super-admin."
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/results/summary",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "results", "summary"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"total_pemilih\": 4582,\n        \"total_sudah_memilih\": 0,\n        \"total_belum_memilih\": 4582,\n        \"persentase_partisipasi\": 0,\n        \"kandidat\": [\n            {\n                \"id\": 1,\n                \"nomor_urut\": 1,\n                \"nama_ketua\": \"John Doe\",\n                \"nama_wakil\": \"Jane Smith\",\n                \"total_suara\": 0,\n                \"persentase\": 0\n            },\n            {\n                \"id\": 2,\n                \"nomor_urut\": 2,\n                \"nama_ketua\": \"Bob Johnson\",\n                \"nama_wakil\": \"Alice Brown\",\n                \"total_suara\": 0,\n                \"persentase\": 0\n            }\n        ]\n    }\n}"
+                        },
+                        {
+                            "name": "Forbidden - Not Admin",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/results/summary",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "results", "summary"]
+                                }
+                            },
+                            "status": "Forbidden",
+                            "code": 403,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"error\",\n    \"message\": \"Anda tidak memiliki akses\"\n}"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://127.0.0.1:8000",
+            "type": "string"
+        }
+    ]
+}
