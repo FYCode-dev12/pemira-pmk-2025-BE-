@@ -3,12 +3,14 @@
 ## ✅ Yang Sudah Dikonfigurasi
 
 ### Backend (Laravel) ✅
-- ✅ CORS configured untuk port 5173, 5174, 3000
-- ✅ Sanctum middleware untuk API authentication
-- ✅ Routes API terdaftar dan berfungsi
-- ✅ API tested dan working
+
+-   ✅ CORS configured untuk port 5173, 5174, 3000
+-   ✅ Sanctum middleware untuk API authentication
+-   ✅ Routes API terdaftar dan berfungsi
+-   ✅ API tested dan working
 
 ### Frontend Files ✅
+
 Semua file React siap di folder: `frontend-integration/`
 
 ---
@@ -30,6 +32,7 @@ Script ini akan otomatis copy semua file ke frontend Anda!
 ## 📦 Manual Setup (jika script gagal)
 
 ### 1. Install Dependencies di Frontend
+
 ```bash
 cd ../pemira-pmk-2025-FE-
 npm install axios react-router-dom
@@ -37,6 +40,7 @@ npm install -D tailwindcss postcss autoprefixer
 ```
 
 ### 2. Copy Files
+
 ```bash
 # Copy dari backend/frontend-integration/ ke frontend/src/
 # Struktur:
@@ -51,6 +55,7 @@ npm install -D tailwindcss postcss autoprefixer
 ```
 
 ### 3. Create .env di Frontend
+
 ```env
 VITE_API_URL=http://127.0.0.1:8000
 VITE_API_BASE_URL=http://127.0.0.1:8000/api
@@ -61,18 +66,21 @@ VITE_API_BASE_URL=http://127.0.0.1:8000/api
 ## 🎯 Test Integration
 
 ### Terminal 1 - Backend
+
 ```bash
 cd /home/fycode/Documents/pemira-pmk-2025/pemira-pmk-2025-BE-
 php artisan serve
 ```
 
 ### Terminal 2 - Frontend
+
 ```bash
 cd /home/fycode/Documents/pemira-pmk-2025/pemira-pmk-2025-FE-
 npm run dev
 ```
 
 ### Test di Browser
+
 ```
 URL: http://localhost:5173
 
@@ -94,13 +102,15 @@ Login Super Admin:
 ## 📁 Files Created
 
 **Backend:**
-- `config/cors.php` - CORS configuration
-- `bootstrap/app.php` - Sanctum middleware
-- `frontend-integration/*` - All React files
-- `copy-to-frontend.sh` - Auto copy script
-- `FRONTEND_INTEGRATION_GUIDE.md` - Detailed guide
+
+-   `config/cors.php` - CORS configuration
+-   `bootstrap/app.php` - Sanctum middleware
+-   `frontend-integration/*` - All React files
+-   `copy-to-frontend.sh` - Auto copy script
+-   `FRONTEND_INTEGRATION_GUIDE.md` - Detailed guide
 
 **Frontend Files Ready to Copy:**
+
 ```
 frontend-integration/
 ├── services/api.js              ← Axios & API endpoints
@@ -124,57 +134,65 @@ frontend-integration/
 ## 🎨 Features
 
 ### Authentication
-- ✅ Separate login for Admin & Pemilih
-- ✅ Token-based authentication
-- ✅ Auto token management
-- ✅ Protected routes
-- ✅ Auto logout on 401
+
+-   ✅ Separate login for Admin & Pemilih
+-   ✅ Token-based authentication
+-   ✅ Auto token management
+-   ✅ Protected routes
+-   ✅ Auto logout on 401
 
 ### Voting System
-- ✅ Kandidat list display
-- ✅ Vote submission
-- ✅ Vote status check (sudah/belum memilih)
-- ✅ One-time voting enforcement
-- ✅ Confirmation dialog
+
+-   ✅ Kandidat list display
+-   ✅ Vote submission
+-   ✅ Vote status check (sudah/belum memilih)
+-   ✅ One-time voting enforcement
+-   ✅ Confirmation dialog
 
 ### Results Dashboard (Admin Only)
-- ✅ Real-time vote counting
-- ✅ Auto refresh every 5 seconds
-- ✅ Participation statistics
-- ✅ Vote percentage per kandidat
-- ✅ Visual progress bars
+
+-   ✅ Real-time vote counting
+-   ✅ Auto refresh every 5 seconds
+-   ✅ Participation statistics
+-   ✅ Vote percentage per kandidat
+-   ✅ Visual progress bars
 
 ### UI/UX
-- ✅ Responsive design (Tailwind CSS)
-- ✅ Loading states
-- ✅ Error handling
-- ✅ Success messages
-- ✅ Clean, modern interface
+
+-   ✅ Responsive design (Tailwind CSS)
+-   ✅ Loading states
+-   ✅ Error handling
+-   ✅ Success messages
+-   ✅ Clean, modern interface
 
 ---
 
 ## 📚 Documentation
 
-- `FRONTEND_INTEGRATION_GUIDE.md` - Panduan lengkap setup
-- `API_TESTING_GUIDE.md` - API testing & Postman collection
-- `README.md` - Project overview
+-   `FRONTEND_INTEGRATION_GUIDE.md` - Panduan lengkap setup
+-   `API_TESTING_GUIDE.md` - API testing & Postman collection
+-   `README.md` - Project overview
 
 ---
 
 ## 🔧 Troubleshooting
 
 ### CORS Error
+
 ✅ Already configured! Port 5173, 5174, 3000 allowed
 
 ### 401 Error
+
 Login dulu, token otomatis tersimpan di localStorage
 
 ### Module not found
+
 ```bash
 npm install axios react-router-dom
 ```
 
 ### Port in use
+
 ```bash
 npm run dev -- --port 5174
 ```

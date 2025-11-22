@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Results (admin & super-admin)
     Route::get('/results/summary', [ResultsController::class, 'summary']);
+    Route::get('/results/voters', [ResultsController::class, 'voters']);
 });

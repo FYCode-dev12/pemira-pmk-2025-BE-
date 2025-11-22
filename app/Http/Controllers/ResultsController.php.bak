@@ -51,6 +51,7 @@ class ResultsController extends Controller
         $query = DB::table('pemilih')
             ->select('id', 'nim', 'nama', 'fakultas', 'program_studi', 'sudah_memilih', 'waktu_memilih');
 
+        // Filter by search
         if ($request->has('search') && $request->search) {
             $search = $request->search;
             $query->where(function($q) use ($search) {
@@ -59,6 +60,7 @@ class ResultsController extends Controller
             });
         }
 
+        // Filter by status
         if ($request->has('filter') && $request->filter !== 'all') {
             if ($request->filter === 'voted') {
                 $query->where('sudah_memilih', true);
@@ -67,25 +69,11 @@ class ResultsController extends Controller
             }
         }
 
-        $query->orderBy('id', 'asc');
-
-        $perPage = $request->input('per_page', 50);
-        $page = $request->input('page', 1);
-        
-        $total = $query->count();
-        $voters = $query->skip(($page - 1) * $perPage)->take($perPage)->get();
+        $voters = $query->orderBy('nama', 'asc')->get();
 
         return response()->json([
             'status' => 'success',
-            'data' => $voters,
-            'pagination' => [
-                'current_page' => (int)$page,
-                'per_page' => (int)$perPage,
-                'total' => $total,
-                'total_pages' => ceil($total / $perPage),
-                'from' => ($page - 1) * $perPage + 1,
-                'to' => min($page * $perPage, $total)
-            ]
+            'data' => $voters
         ]);
     }
 }

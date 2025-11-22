@@ -3,20 +3,23 @@
 ## ✅ Backend sudah dikonfigurasi!
 
 Backend Laravel sudah siap menerima request dari frontend dengan:
-- ✅ CORS configured untuk port 5173, 5174, 3000
-- ✅ Sanctum middleware untuk API authentication
-- ✅ Routes API sudah terdaftar
+
+-   ✅ CORS configured untuk port 5173, 5174, 3000
+-   ✅ Sanctum middleware untuk API authentication
+-   ✅ Routes API sudah terdaftar
 
 ---
 
 ## 📋 Langkah Setup Frontend
 
 ### 1. Navigate ke Folder Frontend
+
 ```bash
 cd ../pemira-pmk-2025-FE-
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install axios react-router-dom
 npm install -D tailwindcss postcss autoprefixer
@@ -47,19 +50,21 @@ cp frontend-integration/postcss.config.js ../pemira-pmk-2025-FE-/
 **ATAU** jika Anda sudah punya struktur sendiri, copy manual file-file berikut:
 
 #### Required Files:
-- `services/api.js` → API configuration & endpoints
-- `contexts/AuthContext.jsx` → Authentication state management
-- `hooks/useAuth.js` → Auth custom hook
-- `pages/AdminLogin.jsx` → Admin login page
-- `pages/PemilihLogin.jsx` → Pemilih login page
-- `pages/Vote.jsx` → Voting page
-- `pages/Results.jsx` → Results page (admin only)
-- `App.jsx` → Main app with routing
-- `.env` → Environment variables
+
+-   `services/api.js` → API configuration & endpoints
+-   `contexts/AuthContext.jsx` → Authentication state management
+-   `hooks/useAuth.js` → Auth custom hook
+-   `pages/AdminLogin.jsx` → Admin login page
+-   `pages/PemilihLogin.jsx` → Pemilih login page
+-   `pages/Vote.jsx` → Voting page
+-   `pages/Results.jsx` → Results page (admin only)
+-   `App.jsx` → Main app with routing
+-   `.env` → Environment variables
 
 ### 4. Update File Struktur React Anda
 
 Sesuaikan struktur folder React Anda:
+
 ```
 src/
 ├── services/
@@ -79,29 +84,31 @@ src/
 ```
 
 ### 5. Configure Environment
+
 Edit file `.env`:
+
 ```env
 VITE_API_URL=http://127.0.0.1:8000
 VITE_API_BASE_URL=http://127.0.0.1:8000/api
 ```
 
 ### 6. Update Tailwind Config (jika belum ada)
+
 File `tailwind.config.js`:
+
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+};
 ```
 
 File `src/index.css`:
+
 ```css
 @tailwind base;
 @tailwind components;
@@ -113,31 +120,35 @@ File `src/index.css`:
 ## 🎯 Testing Integration
 
 ### Terminal 1 - Start Backend
+
 ```bash
 cd /home/fycode/Documents/pemira-pmk-2025/pemira-pmk-2025-BE-
 php artisan serve
 ```
 
 ### Terminal 2 - Start Frontend
+
 ```bash
 cd /home/fycode/Documents/pemira-pmk-2025/pemira-pmk-2025-FE-
 npm run dev
 ```
 
 ### Test Flow:
+
 1. Buka browser: `http://localhost:5173`
 2. Test login pemilih:
-   - NIM: `119380073`
-   - Token: `yhwcjk`
+    - NIM: `119380073`
+    - Token: `yhwcjk`
 3. Test admin login:
-   - Username: `admin` / Password: `Admin123!`
-   - Username: `superadmin` / Password: `SuperAdmin123!`
+    - Username: `admin` / Password: `Admin123!`
+    - Username: `superadmin` / Password: `SuperAdmin123!`
 
 ---
 
 ## 📁 File Structure Overview
 
 ### Backend (Laravel)
+
 ```
 pemira-pmk-2025-BE-/
 ├── routes/api.php              → API endpoints
@@ -149,6 +160,7 @@ pemira-pmk-2025-BE-/
 ```
 
 ### Frontend (React)
+
 ```
 pemira-pmk-2025-FE-/
 ├── .env                        → Environment variables
@@ -171,26 +183,31 @@ pemira-pmk-2025-FE-/
 ## 🔑 API Endpoints Available
 
 ### Authentication
-- `POST /api/auth/admin/login`
-- `POST /api/auth/super-admin/login`
-- `POST /api/auth/pemilih/login`
-- `POST /api/auth/logout`
+
+-   `POST /api/auth/admin/login`
+-   `POST /api/auth/super-admin/login`
+-   `POST /api/auth/pemilih/login`
+-   `POST /api/auth/logout`
 
 ### Kandidat
-- `GET /api/kandidat`
+
+-   `GET /api/kandidat`
 
 ### Voting
-- `POST /api/vote`
-- `GET /api/vote/status`
+
+-   `POST /api/vote`
+-   `GET /api/vote/status`
 
 ### Results
-- `GET /api/results/summary`
+
+-   `GET /api/results/summary`
 
 ---
 
 ## 🎨 Features Implemented
 
 ### Frontend Features:
+
 ✅ Admin & Pemilih separate login pages
 ✅ Token-based authentication
 ✅ Protected routes (vote & results)
@@ -201,6 +218,7 @@ pemira-pmk-2025-FE-/
 ✅ Auto logout on 401
 
 ### Backend Features:
+
 ✅ CORS configured for frontend
 ✅ Sanctum authentication
 ✅ Role-based access control
@@ -211,27 +229,34 @@ pemira-pmk-2025-FE-/
 ## 🔧 Troubleshooting
 
 ### CORS Error
+
 **Problem**: `Access-Control-Allow-Origin` error
 **Solution**: Pastikan backend sudah running dan CORS sudah configured (sudah done!)
 
 ### 401 Unauthorized
+
 **Problem**: Request ditolak
-**Solution**: 
+**Solution**:
+
 1. Login terlebih dahulu
 2. Token otomatis tersimpan di localStorage
 3. Periksa token di browser DevTools → Application → Local Storage
 
 ### Module not found
+
 **Problem**: Import error
 **Solution**: Install dependencies:
+
 ```bash
 npm install axios react-router-dom
 npm install -D tailwindcss postcss autoprefixer
 ```
 
 ### Port already in use
+
 **Problem**: Port 5173 sudah digunakan
 **Solution**: Kill process atau gunakan port lain:
+
 ```bash
 npm run dev -- --port 5174
 ```
@@ -253,11 +278,11 @@ npm run dev -- --port 5174
 
 ## 💡 Tips
 
-- **Development**: Gunakan `npm run dev` untuk hot reload
-- **Production**: Build dengan `npm run build`
-- **Token Management**: Token disimpan di localStorage, auto-attached ke setiap request
-- **Auto Refresh**: Results page refresh setiap 5 detik
-- **One Time Vote**: Pemilih hanya bisa vote sekali
+-   **Development**: Gunakan `npm run dev` untuk hot reload
+-   **Production**: Build dengan `npm run build`
+-   **Token Management**: Token disimpan di localStorage, auto-attached ke setiap request
+-   **Auto Refresh**: Results page refresh setiap 5 detik
+-   **One Time Vote**: Pemilih hanya bisa vote sekali
 
 ---
 
