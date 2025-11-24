@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KandidatController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\ResultsController;
+use App\Http\Controllers\AdminController;
 
 Route::prefix('auth')->group(function () {
     Route::post('/admin/login', [AuthController::class, 'loginAdmin']);
@@ -24,6 +25,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Results (admin & super-admin)
     Route::get('/results/summary', [ResultsController::class, 'summary']);
     Route::get('/results/voters', [ResultsController::class, 'voters']);
+    
+    // Admin - Voting Status Management
+    Route::get('/admin/voting-status', [AdminController::class, 'getVotingStatus']);
+    Route::post('/admin/voting-status', [AdminController::class, 'toggleVotingStatus']);
+    
     Route::get('/health', function () {
     return response()->json([
         'status' => 'ok',

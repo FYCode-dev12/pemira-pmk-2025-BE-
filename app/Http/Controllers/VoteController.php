@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Pemilih;
 use App\Models\Kandidat;
 use App\Models\Suara;
+use App\Models\VotingSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -32,6 +33,14 @@ class VoteController extends Controller
 
     public function vote(Request $request)
     {
+        // Check if voting is open
+        if (!VotingSetting::isVotingOpen()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Voting sedang ditutup. Silakan tunggu hingga voting dibuka kembali.'
+            ], 403);
+        }
+
         $data = $request->validate([
             'kandidat_id' => 'required|integer|exists:kandidat,id'
         ]);

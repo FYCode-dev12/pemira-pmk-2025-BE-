@@ -641,6 +641,197 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "Admin - Voting Control",
+            "item": [
+                {
+                    "name": "Get Voting Status",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/admin/voting-status",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "admin", "voting-status"]
+                        },
+                        "description": "Cek status voting apakah sedang dibuka atau ditutup. Hanya bisa diakses oleh admin/super-admin."
+                    },
+                    "response": [
+                        {
+                            "name": "Voting Closed",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/admin/voting-status",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "admin", "voting-status"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"is_open\": false,\n        \"message\": \"Voting sedang ditutup\"\n    }\n}"
+                        },
+                        {
+                            "name": "Voting Open",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/api/admin/voting-status",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "admin", "voting-status"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"is_open\": true,\n        \"message\": \"Voting sedang dibuka\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Toggle Voting Status - Open",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"is_open\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/admin/voting-status",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "admin", "voting-status"]
+                        },
+                        "description": "Buka voting agar pemilih bisa melakukan voting"
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"is_open\": true\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/admin/voting-status",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "admin", "voting-status"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"message\": \"Voting berhasil dibuka\",\n    \"data\": {\n        \"is_open\": true\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Toggle Voting Status - Close",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"is_open\": false\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/admin/voting-status",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "admin", "voting-status"]
+                        },
+                        "description": "Tutup voting agar pemilih tidak bisa melakukan voting"
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"is_open\": false\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/admin/voting-status",
+                                    "host": ["{{base_url}}"],
+                                    "path": ["api", "admin", "voting-status"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"status\": \"success\",\n    \"message\": \"Voting berhasil ditutup\",\n    \"data\": {\n        \"is_open\": false\n    }\n}"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "variable": [

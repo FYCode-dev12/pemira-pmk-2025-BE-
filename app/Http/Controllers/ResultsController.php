@@ -49,7 +49,7 @@ class ResultsController extends Controller
         }
 
         $query = DB::table('pemilih')
-            ->select('id', 'nim', 'nama', 'fakultas', 'program_studi', 'sudah_memilih', 'waktu_memilih');
+            ->select('id', 'nim', 'nama', 'fakultas', 'program_studi', 'sudah_memilih', 'token', 'waktu_memilih');
 
         if ($request->has('search') && $request->search) {
             $search = $request->search;
