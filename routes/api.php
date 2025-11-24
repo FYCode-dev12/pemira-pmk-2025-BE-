@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KandidatController;
 use App\Http\Controllers\VoteController;
@@ -23,4 +24,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Results (admin & super-admin)
     Route::get('/results/summary', [ResultsController::class, 'summary']);
     Route::get('/results/voters', [ResultsController::class, 'voters']);
+    Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok',
+        'timestamp' => now(),
+        'database' => DB::connection()->getDatabaseName()
+    ]);
+});
 });
