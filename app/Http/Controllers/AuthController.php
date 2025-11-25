@@ -88,6 +88,17 @@ class AuthController extends Controller
             ]);
         }
 
+        // Cek apakah pemilih sudah melakukan voting
+        if ($pemilih->sudah_memilih) {
+            throw ValidationException::withMessages([
+                'token' => ['Anda telah melakukan voting sebelumnya. Tidak dapat login kembali.']
+            ]);
+        }
+
+        // Token tidak perlu dihapus, biarkan tetap ada
+        // Token akan tetap valid sampai pemilih melakukan voting
+        // Setelah voting, flag sudah_memilih akan mencegah login berikutnya
+
         $token = $pemilih->createToken('pemilih-token', ['pemilih'])->plainTextToken;
 
         return response()->json([
@@ -100,6 +111,7 @@ class AuthController extends Controller
                 'nama' => $pemilih->nama,
                 'fakultas' => $pemilih->fakultas,
                 'program_studi' => $pemilih->program_studi,
+                'sudah_memilih' => $pemilih->sudah_memilih
             ]
         ]);
     }
